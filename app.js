@@ -8,26 +8,25 @@ const createNewTaskElement = function (taskString) {
   const listItem = document.createElement("li");
 
   const checkBox = document.createElement("input");
+  checkBox.type = "checkbox";
+
   const label = document.createElement("label");
-  const editInput = document.createElement("input");
-  const editButton = document.createElement("button");
-
-  const deleteButton = document.createElement("button");
-  const deleteButtonImg = document.createElement("img");
-
+  label.className = "task";
   // innerText, not innerHTML: user text must not be parsed as HTML
   label.innerText = taskString;
-  label.className = "task";
 
-  checkBox.type = "checkbox";
+  const editInput = document.createElement("input");
   editInput.type = "text";
   editInput.className = "task";
 
-  editButton.innerText = "Edit";
+  const editButton = document.createElement("button");
   editButton.className = "edit";
+  editButton.innerText = "Edit";
 
-  deleteButton.className = "delete";
+  const deleteButtonImg = document.createElement("img");
   deleteButtonImg.src = "./remove.svg";
+  const deleteButton = document.createElement("button");
+  deleteButton.className = "delete";
   deleteButton.appendChild(deleteButtonImg);
 
   listItem.appendChild(checkBox);
