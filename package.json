@@ -32,5 +32,4 @@
     "*.js": "eslint",
     "*.{js,html,css,json}": "prettier --check"
   }
-
 }
