@@ -43,12 +43,12 @@ const addTask = function () {
   const listItem = createNewTaskElement(taskInput.value);
 
   incompleteTasksList.appendChild(listItem);
-  bindTaskEvents(listItem, taskCompleted);
+  bindTaskEvents(listItem, markTaskCompleted);
 
   taskInput.value = "";
 };
 
-const editTask = function () {
+const toggleEditMode = function () {
   const listItem = this.parentNode;
 
   const editInput = listItem.querySelector("input[type=text]");
@@ -73,16 +73,16 @@ const deleteTask = function () {
   taskList.removeChild(listItem);
 };
 
-const taskCompleted = function () {
+const markTaskCompleted = function () {
   const listItem = this.parentNode;
   completedTasksList.appendChild(listItem);
-  bindTaskEvents(listItem, taskIncomplete);
+  bindTaskEvents(listItem, markTaskIncomplete);
 };
 
-const taskIncomplete = function () {
+const markTaskIncomplete = function () {
   const listItem = this.parentNode;
   incompleteTasksList.appendChild(listItem);
-  bindTaskEvents(listItem, taskCompleted);
+  bindTaskEvents(listItem, markTaskCompleted);
 };
 
 addButton.addEventListener("click", addTask);
@@ -94,15 +94,15 @@ const bindTaskEvents = function (taskListItem, checkBoxEventHandler) {
 
   // on* properties, not addEventListener: handlers are rebound every time
   // a task moves between lists, so each assignment must replace the old one
-  editButton.onclick = editTask;
+  editButton.onclick = toggleEditMode;
   deleteButton.onclick = deleteTask;
   checkBox.onchange = checkBoxEventHandler;
 };
 
 for (let i = 0; i < incompleteTasksList.children.length; i++) {
-  bindTaskEvents(incompleteTasksList.children[i], taskCompleted);
+  bindTaskEvents(incompleteTasksList.children[i], markTaskCompleted);
 }
 
 for (let i = 0; i < completedTasksList.children.length; i++) {
-  bindTaskEvents(completedTasksList.children[i], taskIncomplete);
+  bindTaskEvents(completedTasksList.children[i], markTaskIncomplete);
 }
